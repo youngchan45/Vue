@@ -12,7 +12,7 @@
 <van-grid :border="false" :column-num="3"  class="gridList">
   <van-grid-item to='/'>
     <img src="../../../public/img/menu1.png" />
-    <div>新闻资讯</div>
+    <div>新闻</div>
   </van-grid-item>
   <van-grid-item to='/'>
     <img src="../../../public/img/menu2.png" />
