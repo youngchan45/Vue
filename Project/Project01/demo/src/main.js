@@ -4,7 +4,18 @@ import router from './router.js'
 import store from './store'
 // import axios from 'axios'
 // import VueAxios from 'vue-axios'
-import { NavBar ,Tabbar, TabbarItem,Swipe, SwipeItem,Toast,Grid, GridItem,Image } from 'vant'
+import {
+  NavBar,
+  Tabbar,
+  TabbarItem,
+  Swipe,
+  SwipeItem,
+  Toast,
+  Grid,
+  GridItem,
+  Image,
+  Card
+} from 'vant'
 
 
 // Vue.prototype.$ajax=axios
@@ -14,7 +25,8 @@ Vue.use(Tabbar).use(TabbarItem)
 Vue.use(Swipe).use(SwipeItem)
 Vue.use(Toast)
 Vue.use(Grid).use(GridItem)
-Vue.use(Image )
+Vue.use(Image)
+Vue.use(Card)
 
 Vue.config.productionTip = false
 
