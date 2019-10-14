@@ -1,12 +1,12 @@
 <template>
   <div id="app" class="appContainer">
-
-    <van-nav-bar title="商城test" />
-
-    <transition name='mainTrans'>
+    <!-- 顶部名称 -->
+    <van-nav-bar fixed title="商城test" />
+    <!-- 中间组件 -->
+    <transition name="mainTrans">
       <router-view></router-view>
     </transition>
-
+    <!-- 底部导航 -->
     <van-tabbar v-model="active">
       <van-tabbar-item name="home" icon="home-o" to="/home" dot>首页</van-tabbar-item>
       <van-tabbar-item name="member" icon="friends-o" to="/member">会员</van-tabbar-item>
@@ -16,24 +16,25 @@
   </div>
 </template>
 
-<style>
-.appContainer{
+<style scoped>
+.appContainer {
+  padding-top: 2.75rem;
+  padding-bottom: 4rem;
   overflow-x: hidden;
 }
-.mainTrans-enter{
+.mainTrans-enter {
   opacity: 0;
   transform: translateX(100%);
 }
-.mainTrans-leave-to{
+.mainTrans-leave-to {
   opacity: 0;
   transform: translateX(50%);
   position: absolute;
 }
 .mainTrans-enter-active,
-.mainTrans-leave-to-active{
-  transition: all .5s ease 
+.mainTrans-leave-to-active {
+  transition: all 0.5s ease;
 }
-
 </style>
 <script>
 export default {

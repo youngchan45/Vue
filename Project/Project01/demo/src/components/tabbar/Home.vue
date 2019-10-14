@@ -10,32 +10,31 @@
     </van-swipe>
 
 <van-grid :border="false" :column-num="3"  class="gridList">
-  <van-grid-item to='/Home/Newlist'>
-    <img src="../../../public/img/menu1.png" />
+  <van-grid-item to='/home/newslist'>
+    <img :src= 'menu1' />
     <div>新闻资讯</div>
   </van-grid-item>
   <van-grid-item to='/'>
-    <img src="../../../public/img/menu2.png" />
+    <img :src="menu2" />
     <div>图片分享</div>
   </van-grid-item>
   <van-grid-item to='/'>
-    <img src="../../../public/img/menu3.png" />
+    <img :src="menu3" />
     <div>商品购买</div>
   </van-grid-item>
    <van-grid-item to='/'>
-  <img src="../../../public/img/menu4.png" />
+  <img :src="menu4" />
   <div>留言反馈</div>
   </van-grid-item>
   <van-grid-item to='/'>
-    <img src="../../../public/img/menu5.png" />
+    <img :src="menu5" />
     <div>视频专区</div>
   </van-grid-item>
   <van-grid-item to='/'>
-    <img src="../../../public/img/menu6.png" />
+    <img :src="menu6" />
     <div>联系我们</div>
   </van-grid-item>
 </van-grid>
-
   </div>
 </template> 
 <style scoped>
@@ -59,6 +58,7 @@ width: 2.5rem;
 
 <script>
 import axios from "axios";
+// import menu1 from '../../assets/img/menu1.png'
 
 export default {
   data() {
@@ -68,6 +68,13 @@ export default {
       //   'https://img.yzcdn.cn/vant/apple-2.jpg'
       // ]
       imgList: [],
+      menu1:require('../../assets/img/menu1.png'),
+      menu2:require('../../assets/img/menu2.png'),
+      menu3:require('../../assets/img/menu3.png'),
+      menu4:require('../../assets/img/menu4.png'),
+      menu5:require('../../assets/img/menu5.png'),
+      menu6:require('../../assets/img/menu6.png'),
+
            
     };
   },
@@ -101,6 +108,7 @@ export default {
     // },
     
     // )
+    
   }
 };
 </script>

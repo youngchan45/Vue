@@ -5,6 +5,7 @@ import Shopcar from './components/tabbar/Shopcar.vue'
 import Search from './components/tabbar/Search.vue'
 import Member from './components/tabbar/Member.vue'
 import Newslist from './components/news/Newslist.vue'
+import Newsinfo from './components/news/Newsinfo.vue'
 
 
 Vue.use(Router)
@@ -39,8 +40,12 @@ export default new Router({
       component: Search
     },
     {
-      path:'/home/Newlist',
+      path:'/home/newslist',
       component: Newslist
+    },
+    {
+      path:'/home/newslist/newsinfo/:newid',
+      component: Newsinfo
     }
 
   ]
