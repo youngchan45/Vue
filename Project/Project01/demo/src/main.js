@@ -14,7 +14,11 @@ import {
   Grid,
   GridItem,
   Image,
-  Card
+  Card,
+  Field,
+  Button,
+  Panel,
+  
 } from 'vant'
 
 
@@ -27,6 +31,11 @@ Vue.use(Toast)
 Vue.use(Grid).use(GridItem)
 Vue.use(Image)
 Vue.use(Card)
+Vue.use(Field)
+Vue.use(Button)
+Vue.use(Panel)
+
+
 
 Vue.config.productionTip = false
 

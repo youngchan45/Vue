@@ -3,9 +3,9 @@
     <!-- 表达式需要加上v-bind -->
 
     <ul>
-      <li v-for="(list, newid) in newsList" :key=newid>
+      <li v-for="(list, id) in newsList" :key=id>
         <!-- 此处应加冒号 -->
-        <router-link :to="'/home/newslist/newsinfo'+list.newid" class="news">
+        <router-link :to="'/home/newslist/newsinfo/'+list.id" class="news">
           <div>
             <img :src="list.img_url" alt="news.jpg" />
           </div>

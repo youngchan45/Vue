@@ -44,7 +44,7 @@ export default new Router({
       component: Newslist
     },
     {
-      path:'/home/newslist/newsinfo/:newid',
+      path:'/home/newslist/newsinfo/:id',
       component: Newsinfo
     }
 
