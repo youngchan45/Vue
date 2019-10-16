@@ -42,6 +42,29 @@ export default {
     return {
       active: "home"
     };
-  }
+  },
+  mounted() {
+    // setFontSize();
+  },
+  created(){
+  },
+  methods: {
+    setFontSize() {
+    let docEl = document.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            let clientWidth = docEl.clientWidth;
+            if (clientWidth >= 640) {
+                clientWidth = 640
+            }
+            if (clientWidth === undefined) return;
+            docEl.style.fontSize = 16 * (clientWidth / 640) + 'px';
+        };
+    if (document.addEventListener === undefined) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    document.addEventListener('DOMContentLoaded', recalc, false);
+    recalc();
+}
+  },
 };
 </script>

@@ -8,13 +8,13 @@
       <span>点击{{newsinfo.click}}次</span>
     </div>
     <article class="detail" v-html="newsinfo.content"></article>
-    <comment-box></comment-box>
+    <comment-box :id="this.id"></comment-box>
   </div>
 </template>
 
 <style scoped>
 .container {
-  padding: 0 0.9rem;
+  padding: 0 0.4rem;
 }
 .title {
   text-align: center;

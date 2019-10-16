@@ -18,7 +18,8 @@ import {
   Field,
   Button,
   Panel,
-  
+  Cell, CellGroup,
+  Divider 
 } from 'vant'
 
 
@@ -34,6 +35,8 @@ Vue.use(Card)
 Vue.use(Field)
 Vue.use(Button)
 Vue.use(Panel)
+Vue.use(Cell).use(CellGroup)
+Vue.use(Divider)
 
 
 
