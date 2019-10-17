@@ -2,9 +2,9 @@
   <div>
     <div class="commentTitle">发表评论</div>
     <van-cell-group>
-      <van-field v-model="message" type="textarea" placeholder="请输入评论" rows="3" />
+      <van-field v-model="message" type="textarea" placeholder="请输入评论" rows="3" maxlength='10'/>
     </van-cell-group>
-    <van-button block type="info" >提交评论</van-button>
+    <van-button block type="info" @click="addComment">提交评论</van-button>
     <div>
       <!-- 一次请求：使用slice限制展现从0-a的数据，这样展示的话是不理睬后台的返回数据的分页 -->
       <div v-for="(comment,index) in commentList.slice(0,a)" :key="index">
@@ -70,6 +70,9 @@ export default {
       a: 5
     };
   },
+  mounted(){
+    
+  },
   //   易错：props和data同级！不是写在data里面
   props: ["id"],
   created() {
@@ -97,9 +100,31 @@ export default {
     //   this.pageindex++;
     //   this.currentPage=this.pageIndex;
     this.a+=5;
-      this.getComment();
+      this.getComment();     
+    },
+addComment(){
+  axios.post('http://www.liulongbin.top:3005/api/postcomment/'+this.id).then(
+    res=>{
+      // console.log(res)
+
+      // toast的使用方法和官方文档不一样
+      // this.$toast({
+      //     message:'我是提示文字',
+      //   })
+//高级配置
+
+      const toast = this.$toast({
+  duration: 1000,  
+  forbidClick: true, // 禁用背景点击
+  message: res.data.message
+
+  
+});
       
-    }
+      }
+  )
+}
+
   }
 };
 </script>

@@ -8,6 +8,7 @@
       <span>点击{{newsinfo.click}}次</span>
     </div>
     <article class="detail" v-html="newsinfo.content"></article>
+    <!-- html不区分大小写 因此html标签中要传递的值要写成短横线式；而在插值中和props中则保持一致写成驼峰式 -->
     <comment-box :id="this.id"></comment-box>
   </div>
 </template>
