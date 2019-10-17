@@ -46,7 +46,7 @@ export default {
 //   总是忘记加s
   components:{
 'comment-box':Comment
-  },
+  }, 
   created() {
     axios
       .get("http://www.liulongbin.top:3005/api/getnew/" + this.id)
