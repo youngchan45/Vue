@@ -87,7 +87,6 @@ export default {
       ]
     };
   },
-
   created() {
     axios.get("http://www.liulongbin.top:3005/api/getnewslist").then(res => {
       // this.title = res.data.message;

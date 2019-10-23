@@ -2,23 +2,28 @@
   <!-- 获取id方法一： {{$route.params.id}}-->
   <!--获取id方法二：  {{id}} -->
   <div class="container">
-    <h4 class="title">{{newsinfo.title}}</h4>
+    <div class="title"><div><span>{{newsinfo.title}}</span></div></div>
     <div class="subhead">
       <span>发表时间: {{newsinfo.add_time |timeset}}</span>
       <span>点击{{newsinfo.click}}次</span>
     </div>
     <article class="detail" v-html="newsinfo.content"></article>
     <!-- html不区分大小写 因此html标签中要传递的值要写成短横线式；而在插值中和props中则保持一致写成驼峰式 -->
+    <!-- 父组件给子组件传id -->
     <comment-box :id="this.id"></comment-box>
   </div>
 </template>
 
 <style scoped>
 .container {
-  padding: 0 0.4rem;
+  padding: 0 .4rem;
 }
 .title {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.title span{  
+  float: left;
 }
 .subhead {
   display: flex;
@@ -40,6 +45,7 @@ import Comment from '../comment/Comment.vue'
 export default {
   data() {
     return {
+      //经由列表路由点进来
       id: this.$route.params.id,
       newsinfo: [],
     };
