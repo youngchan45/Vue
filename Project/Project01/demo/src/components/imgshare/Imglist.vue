@@ -20,7 +20,7 @@
         :key="tabs.id">
         <div @click="getImglist(key,title)" class="imglist" v-for="img in imgList" :key="img.id">
           <img :src="img.img_url" alt="图片分享" />
-          
+
           <div class="shade">
             {{img.title}}
             <div>{{img.zhaiyao}}</div>
@@ -34,10 +34,10 @@
   <van-tab v-for="tabs in tabList" :key='tabs.id' :title="tabs.title">
 
     <!-- 联动图片列表区域 -->
-    <div v-for='imgs in imgList' :key='imgs.id'>
+    <!-- <div v-for='imgs in imgList' :key='imgs.id'>
       <img :src="imgs.img_url" alt="">
 {{img.id}}
-    </div>
+    </div> -->
 
   </van-tab>
 </van-tabs>
@@ -76,7 +76,7 @@ export default {
   },
   created() {
     this.getTablist();
-    this.getImglist();
+    // this.getImglist();
   },
   methods: {
     getTablist() {
@@ -87,13 +87,13 @@ export default {
           res.data.message.unshift({ title: "全部", id: 0 });
         });
     },
-    getImglist(tabId,tabTitle) {
-      axios
-        .get("http://www.liulongbin.top:3005/api/getimages/" + tabId)
-        .then(res => {
-          this.imgList = res.data.message;
-        });
-    }
+    // getImglist(tabId,tabTitle) {
+    //   axios
+    //     .get("http://www.liulongbin.top:3005/api/getimages/" + tabId)
+    //     .then(res => {
+    //       this.imgList = res.data.message;
+    //     });
+    // }
   }
 };
 </script>
