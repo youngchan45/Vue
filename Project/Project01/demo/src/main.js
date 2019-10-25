@@ -19,7 +19,10 @@ import {
   Button,
   Panel,
   Cell, CellGroup,
-  Divider 
+  Divider ,
+  Tab, Tabs,
+  Lazyload ,
+
 } from 'vant'
 
 
@@ -37,7 +40,8 @@ Vue.use(Button)
 Vue.use(Panel)
 Vue.use(Cell).use(CellGroup)
 Vue.use(Divider)
-
+Vue.use(Tab).use(Tabs)
+// Vue.use(Lazyload, options)
 
 
 Vue.config.productionTip = false

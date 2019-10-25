@@ -15,7 +15,7 @@
         <img :src="menu1" />
         <div>新闻资讯</div>
       </van-grid-item>
-      <van-grid-item to="/">
+      <van-grid-item to="/imgshare/Imglist">
         <img :src="menu2" />
         <div>图片分享</div>
       </van-grid-item>
