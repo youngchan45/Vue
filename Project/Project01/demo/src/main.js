@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router.js'
 import store from './store'
+import VueLazyload from 'vue-lazyload'
 // import axios from 'axios'
 // import VueAxios from 'vue-axios'
 import {
@@ -22,9 +23,8 @@ import {
   Divider ,
   Tab, Tabs,
   Lazyload ,
-
+  ImagePreview
 } from 'vant'
-
 
 // Vue.prototype.$ajax=axios
 // Vue.use(axios,VueAxios)
@@ -41,8 +41,8 @@ Vue.use(Panel)
 Vue.use(Cell).use(CellGroup)
 Vue.use(Divider)
 Vue.use(Tab).use(Tabs)
-// Vue.use(Lazyload, options)
-
+Vue.use(Lazyload)
+Vue.use(ImagePreview);
 
 Vue.config.productionTip = false
 

@@ -3,7 +3,7 @@
     <!--轮播图-->
     <van-swipe :autoplay="2000" indicator-color="white" class="swipelist">
       <van-swipe-item v-for="(image,index) in imgList" :key="index">
-        <img :src="image.img" />
+        <img :src="image.img" @click="previewImg(imgList,index)" />
       </van-swipe-item>
       <!-- <van-swipe-item>2</van-swipe-item>
            <van-swipe-item>3</van-swipe-item>
@@ -60,6 +60,10 @@
 
 <script>
 import axios from "axios";
+import Vue from 'vue';
+import { ImagePreview } from 'vant';
+
+Vue.use(ImagePreview);
 // import menu1 from '../../assets/img/menu1.png'
 export default {
   data() {
@@ -92,6 +96,17 @@ export default {
         // }
       });
     },
+    previewImg(imgList, index) {
+      ImagePreview({
+        images: imgList.map(r=>r.src), //图片数组
+        showIndex: true,
+        loop: false,
+        startPosition: index,
+        onClose() {
+    // do something
+  }
+      });
+    }
   }
 };
 </script>

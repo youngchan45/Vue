@@ -27,21 +27,18 @@
           </div>
         </div>
       </van-tab>
-    </van-tabs> -->
-
-<van-tabs v-model="active" swipeable>
-  <!-- 标签栏区域 -->
-  <van-tab v-for="tabs in tabList" :key='tabs.id' :title="tabs.title">
-
-    <!-- 联动图片列表区域 -->
-    <!-- <div v-for='imgs in imgList' :key='imgs.id'>
-      <img :src="imgs.img_url" alt="">
-{{img.id}}
-    </div> -->
-
-  </van-tab>
-</van-tabs>
-
+    </van-tabs>-->
+    <van-tabs swipeable v-model="active" >
+      <!-- 标签栏区域 -->
+      <van-tab v-for="tabs in tabList" :key="tabs.id" :title="tabs.title" :name="tabs.id" @click="getImglist(tabs.id)">
+        <!-- 联动图片列表区域 -->
+        <!-- 思路：先测试每次点击tab 都有id传入 再把图片放进去 -->
+        <div v-for="(imgs,index) in imgList" :key="imgs.id">
+          <img v-lazy="imgs.img_url" alt @click="previewImg(imgList,index)" />
+        </div>
+        <!-- <img v-for="imgs in imgList" v-lazy="imgs.img_url" :key='imgs.id'>   -->
+      </van-tab>
+    </van-tabs>
   </div>
 </template>
 
@@ -65,18 +62,22 @@
 </style>
 
 <script>
+import Vue from "vue";
 import axios from "axios";
+import { ImagePreview } from "vant";
+Vue.use(ImagePreview);
+
 export default {
   data() {
     return {
-      active: "",
+      active: "", 
       tabList: [],
-      imgList: []
+      imgList: [],
     };
   },
   created() {
     this.getTablist();
-    // this.getImglist();
+    this.getImglist(0);
   },
   methods: {
     getTablist() {
@@ -87,13 +88,23 @@ export default {
           res.data.message.unshift({ title: "全部", id: 0 });
         });
     },
-    // getImglist(tabId,tabTitle) {
-    //   axios
-    //     .get("http://www.liulongbin.top:3005/api/getimages/" + tabId)
-    //     .then(res => {
-    //       this.imgList = res.data.message;
-    //     });
-    // }
+    getImglist(tabId) {
+      axios
+        .get("http://www.liulongbin.top:3005/api/getimages/" + tabId)
+        .then(res => {
+          this.imgList = res.data.message;
+        });
+    },
+    previewImg(imgList,index){
+      ImagePreview({
+        images:this.imgList,
+        showIndex:true,
+          loop:false,
+          startPosition:index
+      }
+  
+);
+    }
   }
 };
 </script>
