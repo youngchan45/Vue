@@ -7,6 +7,8 @@ import Member from './components/tabbar/Member.vue'
 import Newslist from './components/news/Newslist.vue'
 import Newsinfo from './components/news/Newsinfo.vue'
 import Imglist from './components/imgshare/Imglist.vue'
+import Imginfo from './components/imgshare/Imginfo.vue'
+import Goodlist from './components/goods/Goodlist.vue'
 
 
 Vue.use(Router)
@@ -49,8 +51,16 @@ export default new Router({
       component: Newsinfo
     },
     {
-      path:'/imgshare/Imglist',
+      path:'/home/imglist',
       component:Imglist
+    },
+    {
+      path:'/home/imglist/imginfo/:id',
+      component:Imginfo
+    },
+    {
+      path:'/home/goodlist',
+      component:Goodlist
     }
 
   ]

@@ -15,11 +15,12 @@
         <img :src="menu1" />
         <div>新闻资讯</div>
       </van-grid-item>
-      <van-grid-item to="/imgshare/Imglist">
+      <!-- 放入链接时不能加入文件夹名字 -->
+      <van-grid-item to="/home/imglist">
         <img :src="menu2" />
         <div>图片分享</div>
       </van-grid-item>
-      <van-grid-item to="/">
+      <van-grid-item to="/home/goodlist">
         <img :src="menu3" />
         <div>商品购买</div>
       </van-grid-item>

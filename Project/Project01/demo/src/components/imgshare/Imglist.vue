@@ -28,14 +28,20 @@
         </div>
       </van-tab>
     </van-tabs>-->
-    <van-tabs swipeable v-model="active" >
+    <van-tabs swipeable v-model="active">
       <!-- 标签栏区域 -->
-      <van-tab v-for="tabs in tabList" :key="tabs.id" :title="tabs.title" :name="tabs.id" @click="getImglist(tabs.id)">
+      <van-tab
+        v-for="tabs in tabList"
+        :key="tabs.id"
+        :title="tabs.title"
+        :name="tabs.id"
+        @click="getImglist(tabs.id)"
+      >
         <!-- 联动图片列表区域 -->
         <!-- 思路：先测试每次点击tab 都有id传入 再把图片放进去 -->
-        <div v-for="(imgs,index) in imgList" :key="imgs.id">
-          <img v-lazy="imgs.img_url" alt @click="previewImg(imgList,index)" />
-        </div>
+        <router-link :to='"/home/imglist/imginfo/"+imgs.id' v-for="(imgs,index) in imgList" :key="index">
+          <van-image class='img' lazy-load show-loading :src="imgs.img_url" alt='图片分享'/>
+        </router-link>
         <!-- <img v-for="imgs in imgList" v-lazy="imgs.img_url" :key='imgs.id'>   -->
       </van-tab>
     </van-tabs>
@@ -43,10 +49,10 @@
 </template>
 
 <style scoped>
-.imglist img {
+.img {
   width: 100%;
-  display: block;
-  position: relative;
+  /* display: block;
+  position: relative; */
 }
 .shade {
   z-index: 9;
@@ -62,17 +68,14 @@
 </style>
 
 <script>
-import Vue from "vue";
 import axios from "axios";
-import { ImagePreview } from "vant";
-Vue.use(ImagePreview);
 
 export default {
   data() {
     return {
-      active: "", 
+      active: "",
       tabList: [],
-      imgList: [],
+      imgList: []
     };
   },
   created() {
@@ -95,16 +98,14 @@ export default {
           this.imgList = res.data.message;
         });
     },
-    previewImg(imgList,index){
-      ImagePreview({
-        images:this.imgList,
-        showIndex:true,
-          loop:false,
-          startPosition:index
-      }
-  
-);
-    }
+    // previewImg(imgList, index) {
+    //   ImagePreview({
+    //     images: this.imgList,
+    //     showIndex: true,
+    //     loop: false,
+    //     startPosition: index
+    //   });
+    // }
   }
 };
 </script>
