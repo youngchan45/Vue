@@ -20,7 +20,7 @@
         <img :src="menu2" />
         <div>图片分享</div>
       </van-grid-item>
-      <van-grid-item to="/home/goodlist">
+      <van-grid-item to="/home/goodslist">
         <img :src="menu3" />
         <div>商品购买</div>
       </van-grid-item>

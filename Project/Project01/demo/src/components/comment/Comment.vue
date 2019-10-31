@@ -8,9 +8,9 @@
     <van-button block type="info" @click="addComment">提交评论</van-button>
     <div>
       <!-- 一次请求：使用slice限制展现从0-a的数据，这样展示的话是不理睬后台的返回数据的分页 -->
-      <!-- <div v-for="(comment,index) in commentList.slice(0,a)" :key="index"> -->
+      <div v-for="(comment,index) in commentList.slice(0,a)" :key="index">
       <!-- 分步请求：这里不用做限制，根据后台的数据分页返回即可 -->
-      <div v-for="(comment,index) in commentList" :key="index">
+      <!-- <div v-for="(comment,index) in commentList" :key="index"> -->
         <div class="commentHead">
           <span>第{{index+1}}楼</span>
           <span>用户：{{comment.user_name}}</span>
@@ -31,15 +31,15 @@
     padding: .6rem;
 } */
 .commentTitle {
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 .van-cell {
-  padding: .3rem 0;
+  padding: 0.3rem 0;
 }
-.word{
-  font-size: .8rem;
-  color:#cecece;
+.word {
+  font-size: 0.8rem;
+  color: #cecece;
   float: right;
 }
 .van-button {
@@ -48,8 +48,8 @@
 }
 .commentHead,
 .commentDetail {
-  font-size: .73rem;
-  padding: .3rem 0;
+  font-size: 0.73rem;
+  padding: 0.3rem 0;
 }
 .commentHead {
   background-color: #e5e5e5;
@@ -59,7 +59,7 @@
 /* 不加以下的话，在5/se机型中评论的信息标题会换行 */
 .commentHead > span {
   white-space: nowrap;
-  transform: scale(.96);
+  transform: scale(0.96);
 }
 </style>
 
@@ -85,7 +85,7 @@ export default {
     this.getComment();
   },
   methods: {
-    //加载第一页评论
+    //加载第一页评论  bbbbbb
     getComment() {
       axios
         .get(
@@ -105,10 +105,10 @@ export default {
     getMore() {
       //   使用实例中的东西记得加this
       //页码+1
-      this.pageindex++;
+      // this.pageindex++;
       //   this.currentPage=this.pageIndex;
-      // this.a += 5;
-      this.getComment();
+      this.a += 5;
+      // this.getComment();
     },
     addComment() {
       if (this.message.trim().length === 0) {

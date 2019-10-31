@@ -23,26 +23,13 @@ import {
   Divider ,
   Tab, Tabs,
   Lazyload ,
-  ImagePreview
+  ImagePreview,
+  Stepper ,
 } from 'vant'
 
 // Vue.prototype.$ajax=axios
 // Vue.use(axios,VueAxios)
-Vue.use(NavBar)
-Vue.use(Tabbar).use(TabbarItem)
-Vue.use(Swipe).use(SwipeItem)
-Vue.use(Toast)
-Vue.use(Grid).use(GridItem)
-Vue.use(Image)
-Vue.use(Card)
-Vue.use(Field)
-Vue.use(Button)
-Vue.use(Panel)
-Vue.use(Cell).use(CellGroup)
-Vue.use(Divider)
-Vue.use(Tab).use(Tabs)
-Vue.use(Lazyload)
-Vue.use(ImagePreview);
+Vue.use(NavBar).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Toast).use(Grid).use(GridItem).use(Image).use(Card).use(Field).use(Button).use(Panel).use(Cell).use(CellGroup).use(Divider).use(Tab).use(Tabs).use(Lazyload).use(ImagePreview).use(Stepper )
 
 Vue.config.productionTip = false
 
