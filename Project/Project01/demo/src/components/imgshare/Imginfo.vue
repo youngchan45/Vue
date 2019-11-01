@@ -33,7 +33,7 @@ import axios from "axios";
 import Vue from "vue";
 import { ImagePreview } from "vant";
 Vue.use(ImagePreview);
-import Comment from "../comment/Comment.vue";
+import Comment from "../subcomponent/Comment.vue";
 export default {
   data() {
     return {

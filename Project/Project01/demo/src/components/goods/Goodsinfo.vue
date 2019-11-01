@@ -1,11 +1,15 @@
 <template>
   <div>
     <!-- 商品图片轮播 -->
-    <van-swipe :autoplay="2000" indicator-color="white" class="swipelist border">
+    <!-- <van-swipe :autoplay="2000" indicator-color="white" class="swipelist border">
       <van-swipe-item v-for="(goodsImg,index) in goodsImgList" :key="index">
         <img :src="goodsImg.src" />
       </van-swipe-item>
-    </van-swipe>
+    </van-swipe>-->
+    <!-- <transition name="shopcar"></transition>
+
+    <div class="ball"></div> -->
+    <swipe class="border" :imgList="goodsImgList"></swipe>
     <!-- 购买详情 -->
     <div class="border" v-for="(goodsItem,index) in goodsInfo" :key="index">
       <div class="title">{{goodsItem.title}}</div>
@@ -28,7 +32,7 @@
       </div>
       <div>
         <van-button type="info" size="small">立即购买</van-button>
-        <van-button type="danger" size="small">加入购物车</van-button>
+        <van-button type="danger" size="small" @click='addToCar'>加入购物车</van-button>
       </div>
     </div>
     <!-- 商品参数 -->
@@ -39,14 +43,16 @@
         <div>库存情况：{{priceItem.stock_quantity}}件</div>
         <div>上架时间：{{priceItem.add_time |timeset}}</div>
       </div>
-      <van-button plain hairline type="info" block size="small">图文介绍</van-button>
-      <van-button plain hairline type="danger" block size="small">商品评论</van-button>
+      <van-button plain hairline type="info" block size="small" @click="goIntro(id)">图文介绍</van-button>
+      <van-button plain hairline type="danger" block size="small" @click="goCom(id)">商品评论</van-button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+// import { Swipe } from 'vant';
+import Swipe from "../subcomponent/Swipe.vue";
 export default {
   data() {
     return {
@@ -54,7 +60,7 @@ export default {
       goodsImgList: [],
       id: this.$route.params.id,
       goodsInfo: [],
-      priceList:[],
+      priceList: []
     };
   },
   created() {
@@ -77,19 +83,30 @@ export default {
           this.goodsInfo = res.data.message;
         });
     },
-    getPrice(){
-      axios.get('http://www.liulongbin.top:3005/api/goods/getinfo/'+this.id).then(res=>{
-        this.priceList=res.data.message;
-      })
+    getPrice() {
+      axios
+        .get("http://www.liulongbin.top:3005/api/goods/getinfo/" + this.id)
+        .then(res => {
+          this.priceList = res.data.message;
+        });
+    },
+    goIntro(id) {
+      this.$router.push("/home/goodslist/goodsinfo/goodsintro/" + this.id);
+    },
+    goCom(id) {
+      this.$router.push("/home/goodslist/goodsinfo/goodscom/" + this.id);
+    },
+    addToCar(){
+      this.$toast('已加入购物车')
     }
+  },
+  components: {
+    swipe: Swipe
   }
 };
 </script>
 
 <style scoped>
-img {
-  width: 100%;
-}
 .border {
   border: 1px solid #ccc;
   box-shadow: 0 0 0.5rem #ccc;
@@ -132,4 +149,21 @@ span:nth-child(4) {
 .info > div {
   padding: 0.3rem 0;
 }
+/* .ball {
+  background-color: rgba(255, 0, 0, 0.377);
+  border-radius: 50%;
+  position: absolute;
+  top: 29rem;
+  left: 7rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  z-index: 99;
+} */
+/* .shopcar-enter {
+  opacity: 0;
+  transform: 
+}
+.shopcar-leave-to {
+  opacity: 0;
+} */
 </style>

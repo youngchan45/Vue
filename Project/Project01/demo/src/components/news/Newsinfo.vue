@@ -40,7 +40,7 @@
 
 <script>
 import axios from "axios";
-import Comment from '../comment/Comment.vue'
+import Comment from '../subcomponent/Comment.vue'
 
 export default {
   data() {

@@ -1,14 +1,13 @@
 <template>
   <div>
     <!--轮播图-->
-    <van-swipe :autoplay="2000" indicator-color="white" class="swipelist">
+    <!-- <van-swipe :autoplay="2000" indicator-color="white" class="swipelist">
       <van-swipe-item v-for="(image,index) in imgList" :key="index">
         <img :src="image.img" @click="previewImg(imgList,index)" />
       </van-swipe-item>
-      <!-- <van-swipe-item>2</van-swipe-item>
-           <van-swipe-item>3</van-swipe-item>
-      <van-swipe-item>4</van-swipe-item>-->
-    </van-swipe>
+    </van-swipe> -->
+    <swipe :imgList=imgList></swipe>
+
     <!--九宫格-->
     <van-grid :border="false" :column-num="3" class="gridList">
       <van-grid-item to="/home/newslist">
@@ -42,17 +41,17 @@
   </div>
 </template> 
 <style scoped>
-.swipelist {
+/* .swipelist {
   height: 9rem;
   width: 100%;
 }
 .swipelist img {
   height: 100%;
   width: 100%;
-}
+}*/
 .gridList img {
   width: 2.5rem;
-}
+} 
 .van-grid-item__content div {
   font-size: 0.5rem;
   margin-top: 0.3rem;
@@ -61,8 +60,9 @@
 
 <script>
 import axios from "axios";
-import Vue from 'vue';
-import { ImagePreview } from 'vant';
+import Vue from "vue";
+import Swipe from '../subcomponent/Swipe.vue'
+import { ImagePreview } from "vant";
 
 Vue.use(ImagePreview);
 // import menu1 from '../../assets/img/menu1.png'
@@ -99,15 +99,18 @@ export default {
     },
     previewImg(imgList, index) {
       ImagePreview({
-        images: imgList.map(r=>r.src), //图片数组
+        images: imgList.map(r => r.src), //图片数组
         showIndex: true,
         loop: false,
         startPosition: index,
         onClose() {
-    // do something
-  }
+          // do something
+        }
       });
     }
+  },
+  components: {
+    'swipe': Swipe
   }
 };
 </script>
