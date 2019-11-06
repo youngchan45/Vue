@@ -8,7 +8,7 @@
     </van-swipe>-->
     <!-- <transition name="shopcar"></transition>
 
-    <div class="ball"></div> -->
+    <div class="ball"></div>-->
     <swipe class="border" :imgList="goodsImgList"></swipe>
     <!-- 购买详情 -->
     <div class="border" v-for="(goodsItem,index) in goodsInfo" :key="index">
@@ -21,18 +21,21 @@
       </div>
       <div class="num">
         <span>购买数量：</span>
-        <van-stepper
+        <!-- <van-stepper
           v-model="value"
           min="1"
           max="8"
           integer
           input-width="1.5rem"
           button-size="1.7rem"
-        />
+        />-->
+        <!--绑定子组件文件里面传递的方法，另起一个函数名，在这个函数里面处理传递过来的数据-->
+        <stepper @changeCount="countChange"></stepper>
       </div>
       <div>
         <van-button type="info" size="small">立即购买</van-button>
-        <van-button type="danger" size="small" @click='addToCar'>加入购物车</van-button>
+        <!--把这个函数传递给按钮-->
+        <van-button type="danger" size="small" @click="addToCar">加入购物车</van-button>
       </div>
     </div>
     <!-- 商品参数 -->
@@ -53,14 +56,15 @@
 import axios from "axios";
 // import { Swipe } from 'vant';
 import Swipe from "../subcomponent/Swipe.vue";
+import Stepper from "../subcomponent/Stepper.vue";
 export default {
   data() {
     return {
-      value: "",
       goodsImgList: [],
       id: this.$route.params.id,
       goodsInfo: [],
-      priceList: []
+      priceList: [],
+      selectedCount: 1,
     };
   },
   created() {
@@ -96,12 +100,21 @@ export default {
     goCom(id) {
       this.$router.push("/home/goodslist/goodsinfo/goodscom/" + this.id);
     },
-    addToCar(){
-      this.$toast('已加入购物车')
+    //步进器数量改变
+    countChange(value) {
+      this.selectedCount = value;
+      console.log('子组件',value);
+    },
+    //点击加入购物车
+    addToCar() {
+      this.$toast("已加入购物车");
+      // this.selectedCount = value;
+      console.log(this.selectedCount)
     }
   },
   components: {
-    swipe: Swipe
+    swipe: Swipe,
+    Stepper: Stepper
   }
 };
 </script>
