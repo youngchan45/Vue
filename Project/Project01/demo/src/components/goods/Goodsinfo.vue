@@ -30,7 +30,7 @@
           button-size="1.7rem"
         />-->
         <!--绑定子组件文件里面传递的方法，另起一个函数名，在这个函数里面处理传递过来的数据-->
-        <stepper @changeCount="countChange"></stepper>
+        <stepper @changeCount="countChange" :max1='msg'></stepper>
       </div>
       <div>
         <van-button type="info" size="small">立即购买</van-button>
@@ -65,6 +65,7 @@ export default {
       goodsInfo: [],
       priceList: [],
       selectedCount: 1,
+      msg:this.priceItem.stock_quantity,
     };
   },
   created() {

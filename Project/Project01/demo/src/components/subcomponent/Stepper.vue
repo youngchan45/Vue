@@ -3,7 +3,8 @@
     <!--易错点：这里是使用监听 而不是点击-->
     <van-stepper
       v-model="value"
-      max="8"
+      min="1"
+      max="max1"
       integer
       input-width="3rem"
       button-size="1.1rem"
@@ -15,6 +16,7 @@
 
 <script>
 export default {
+  props: ["max1"],
   data() {
     return {
       value: 1
@@ -22,9 +24,9 @@ export default {
   },
   methods: {
     sendCount() {
-        //易错点：子组件传递给父组件的方法中，函数名是父组件上绑定的函数名；子组件要传递给父组件的是另一个函数名
-      this.$emit("changeCount",this.value);
-    //   console.log(this.value);
+      //易错点：子组件传递给父组件的方法中，函数名是父组件上绑定的函数名；子组件要传递给父组件的是另一个函数名
+      this.$emit("changeCount", this.value);
+      //   console.log(this.value);
     }
   }
   //重要：
