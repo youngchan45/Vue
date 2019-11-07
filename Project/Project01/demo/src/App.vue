@@ -47,7 +47,7 @@ export default {
     // setFontSize();
   },
   created() {
-this.test()
+
   },
   methods: {
     setFontSize() {
@@ -67,9 +67,6 @@ this.test()
       document.addEventListener("DOMContentLoaded", recalc, false);
       recalc();
     },
-    test(){
-      console.log(this.$refs.ok.info.value)
-    }
   }
 };
 </script>

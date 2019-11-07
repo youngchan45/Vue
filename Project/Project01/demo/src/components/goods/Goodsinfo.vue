@@ -11,6 +11,7 @@
     <div class="ball"></div>-->
     <swipe class="border" :imgList="goodsImgList"></swipe>
     <!-- 购买详情 -->
+    <div class="border" v-for="(priceItem,index) in priceList" :key="priceItem.goods_no">
     <div class="border" v-for="(goodsItem,index) in goodsInfo" :key="index">
       <div class="title">{{goodsItem.title}}</div>
       <div class="price" v-for="(priceItem,index) in priceList" :key="index">
@@ -30,7 +31,7 @@
           button-size="1.7rem"
         />-->
         <!--绑定子组件文件里面传递的方法，另起一个函数名，在这个函数里面处理传递过来的数据-->
-        <stepper @changeCount="countChange" :max1='msg'></stepper>
+        <stepper @changeCount="countChange" :max="priceList.stock_quantity"></stepper>
       </div>
       <div>
         <van-button type="info" size="small">立即购买</van-button>
@@ -50,6 +51,7 @@
       <van-button plain hairline type="danger" block size="small" @click="goCom(id)">商品评论</van-button>
     </div>
   </div>
+   </div>
 </template>
 
 <script>
@@ -63,9 +65,9 @@ export default {
       goodsImgList: [],
       id: this.$route.params.id,
       goodsInfo: [],
-      priceList: [],
+      priceList: {},
       selectedCount: 1,
-      msg:this.priceItem.stock_quantity,
+      // max: this.priceList
     };
   },
   created() {
@@ -104,13 +106,13 @@ export default {
     //步进器数量改变
     countChange(value) {
       this.selectedCount = value;
-      console.log('子组件',value);
+      console.log("子组件", value);
     },
     //点击加入购物车
     addToCar() {
       this.$toast("已加入购物车");
       // this.selectedCount = value;
-      console.log(this.selectedCount)
+      console.log(this.selectedCount);
     }
   },
   components: {
