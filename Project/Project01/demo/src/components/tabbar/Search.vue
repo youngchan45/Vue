@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>当前数量{{$store.state.count}}</h4>
+    <h4>{{$store.getters.objCount}}</h4>
   </div>
 </template>
 

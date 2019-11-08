@@ -11,15 +11,20 @@
     <div class="ball"></div>-->
     <swipe class="border" :imgList="goodsImgList"></swipe>
     <!-- 购买详情 -->
-    <div class="border" v-for="(priceItem,index) in priceList" :key="priceItem.goods_no">
-    <div class="border" v-for="(goodsItem,index) in goodsInfo" :key="index">
-      <div class="title">{{goodsItem.title}}</div>
-      <div class="price" v-for="(priceItem,index) in priceList" :key="index">
-        <span class>市场价：</span>
-        <span>{{priceItem.market_price}}</span>
-        <span>销售价：</span>
-        <span>{{priceItem.sell_price}}</span>
-      </div>
+    <!-- <div class="border" v-for="(priceItem,index) in priceList" :key="index"> -->
+    <!-- <div class="border" v-for="(goodsItem,index) in goodsInfo" :key="index"> -->
+    <div class="price border" v-for="(priceItem,index) in priceList" :key="index">
+      <div class="title">{{priceItem.title}}</div>
+      <span class>市场价：</span>
+      <span>{{priceItem.market_price}}</span>
+      <span>销售价：</span>
+      <span>{{priceItem.sell_price}}</span>
+      <!-- </div>
+      <div class="info">-->
+      <div>商品货号：{{priceItem.goods_no}}</div>
+      <div>库存情况：{{priceItem.stock_quantity}}件</div>
+      <div>上架时间：{{priceItem.add_time |timeset}}</div>
+
       <div class="num">
         <span>购买数量：</span>
         <!-- <van-stepper
@@ -33,25 +38,24 @@
         <!--绑定子组件文件里面传递的方法，另起一个函数名，在这个函数里面处理传递过来的数据-->
         <stepper @changeCount="countChange" :max="priceList.stock_quantity"></stepper>
       </div>
-      <div>
+
+      <!-- 按钮 -->
+
+      <!-- 商品参数 -->
+      <!-- <div class="border" v-for="(priceItem,index) in priceList" :key="index"> -->
+      <!-- <div class="title">商品参数</div> -->
+
+      <div class="border">
         <van-button type="info" size="small">立即购买</van-button>
         <!--把这个函数传递给按钮-->
-        <van-button type="danger" size="small" @click="addToCar">加入购物车</van-button>
+        <van-button type="danger" size="small" @click="addToShopCar">加入购物车</van-button>
+        <!-- </div> -->
+        <van-button plain hairline type="info" block size="small" @click="goIntro(id)">图文介绍</van-button>
+        <van-button plain hairline type="danger" block size="small" @click="goCom(id)">商品评论</van-button>
       </div>
-    </div>
-    <!-- 商品参数 -->
-    <div class="border" v-for="(priceItem,index) in priceList" :key="priceItem.goods_no">
-      <div class="title">商品参数</div>
-      <div class="info">
-        <div>商品货号：{{priceItem.goods_no}}</div>
-        <div>库存情况：{{priceItem.stock_quantity}}件</div>
-        <div>上架时间：{{priceItem.add_time |timeset}}</div>
-      </div>
-      <van-button plain hairline type="info" block size="small" @click="goIntro(id)">图文介绍</van-button>
-      <van-button plain hairline type="danger" block size="small" @click="goCom(id)">商品评论</van-button>
+      <!-- </div> -->
     </div>
   </div>
-   </div>
 </template>
 
 <script>
@@ -65,8 +69,8 @@ export default {
       goodsImgList: [],
       id: this.$route.params.id,
       goodsInfo: [],
-      priceList: {},
-      selectedCount: 1,
+      priceList: [],
+      selectedCount: 1
       // max: this.priceList
     };
   },
@@ -90,6 +94,7 @@ export default {
           this.goodsInfo = res.data.message;
         });
     },
+    // 获取id、上架时间、货号、库存、数量
     getPrice() {
       axios
         .get("http://www.liulongbin.top:3005/api/goods/getinfo/" + this.id)
@@ -109,10 +114,16 @@ export default {
       console.log("子组件", value);
     },
     //点击加入购物车
-    addToCar() {
+    addToShopCar() {
+      var goodsInfo = {
+        id: this.id,
+        price: this.priceList.priceItem.sell_price,
+        count: this.selectedCount,
+        selected: true
+      };
+      this.$store.commit("addToCar", goodsInfo);
       this.$toast("已加入购物车");
-      // this.selectedCount = value;
-      console.log(this.selectedCount);
+      console.log(this.goodsInfo);
     }
   },
   components: {
