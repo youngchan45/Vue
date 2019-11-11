@@ -19,5 +19,7 @@ export default {
 </script>
 
 <style scoped>
-
+*{
+    padding: .2rem;
+}
 </style>

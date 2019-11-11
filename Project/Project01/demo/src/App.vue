@@ -10,7 +10,12 @@
     <van-tabbar v-model="active">
       <van-tabbar-item name="home" icon="home-o" to="/home" dot>首页</van-tabbar-item>
       <van-tabbar-item name="member" icon="friends-o" to="/member">会员</van-tabbar-item>
-      <van-tabbar-item name="shopcar" icon="cart-o" to="/shopcar" info="0" ref='ok'>购物车</van-tabbar-item>
+      <van-tabbar-item
+        name="shopcar"
+        icon="cart-o"
+        to="/shopcar"
+        :info="$store.getters.getAllCount"
+      >购物车</van-tabbar-item>
       <van-tabbar-item name="search" icon="search" to="/search">搜索</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -46,9 +51,7 @@ export default {
   mounted() {
     // setFontSize();
   },
-  created() {
-
-  },
+  created() {},
   methods: {
     setFontSize() {
       let docEl = document.documentElement,
@@ -66,7 +69,7 @@ export default {
       window.addEventListener(resizeEvt, recalc, false);
       document.addEventListener("DOMContentLoaded", recalc, false);
       recalc();
-    },
+    }
   }
 };
 </script>

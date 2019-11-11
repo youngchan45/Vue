@@ -17,24 +17,20 @@ export default new Vuex.Store({
     // add2(state, c) {
     //   state.count -= c
     // }
-    addToCar(state,goodsInfo) {     
+    addToCar(state, goodsForCar) {
       // this.selectedCount = value;
       // 把页面上的数据做成一个数组存放起来
-      var flag= false;
-      state.car.some(item=>{
-        if(item.id==goodsInfo.id){
-          item.count+=goodsInfo.count;
-          flag =true;
+      var flag = false;
+      state.car.some(item => {
+        if (item.id == goodsForCar.id) {
+          item.count += goodsForCar.count;
+          flag = true;
           return true;
-
-        }                
+        }
       })
-      if(!flag){
-        state.car.push(goodsInfo)
+      if (!flag) {
+        state.car.push(goodsForCar)
       }
-
-      
-      
     }
   },
   actions: {
@@ -45,5 +41,13 @@ export default new Vuex.Store({
     //  objCount(state){
     //    return '最新数据是'+ state.count
     //  } 
+    getAllCount(state) {
+      let c = 0;
+      state.car.forEach(item => {
+        c += item.count;
+      })
+      return c;
+      
+    }
   }
 })

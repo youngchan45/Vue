@@ -12,7 +12,7 @@
       ref="stepper"
       async-change
     />
-    {{max}}
+    <!-- {{max}} -->
   </div>
 </template>
 
