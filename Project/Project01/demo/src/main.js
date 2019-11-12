@@ -25,12 +25,13 @@ import {
   Lazyload ,
   ImagePreview,
   Stepper ,
-  Checkbox, CheckboxGroup
+  Checkbox, CheckboxGroup,
+  Icon 
 } from 'vant'
 
 // Vue.prototype.$ajax=axios
 // Vue.use(axios,VueAxios)
-Vue.use(NavBar).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Toast).use(Grid).use(GridItem).use(Image).use(Card).use(Field).use(Button).use(Panel).use(Cell).use(CellGroup).use(Divider).use(Tab).use(Tabs).use(Lazyload).use(ImagePreview).use(Stepper ).use(Checkbox).use(CheckboxGroup)
+Vue.use(NavBar).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Toast).use(Grid).use(GridItem).use(Image).use(Card).use(Field).use(Button).use(Panel).use(Cell).use(CellGroup).use(Divider).use(Tab).use(Tabs).use(Lazyload).use(ImagePreview).use(Stepper ).use(Checkbox).use(CheckboxGroup).use(Icon )
 
 Vue.config.productionTip = false
 

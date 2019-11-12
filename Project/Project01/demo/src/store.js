@@ -2,12 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
+// 使用JSON.parse()方法將數據轉換為js對象
+var carLocal = JSON.parse(localStorage.getItem('car') || '[]')
 export default new Vuex.Store({
   state: {
     // 练习
     // count: 0,
-    car: [],
+    // car: [],
+    car: carLocal,
   },
   mutations: {
     // 练习
@@ -31,6 +33,8 @@ export default new Vuex.Store({
       if (!flag) {
         state.car.push(goodsForCar)
       }
+      localStorage.setItem('car', JSON.stringify(state.car))
+
     }
   },
   actions: {
@@ -47,7 +51,6 @@ export default new Vuex.Store({
         c += item.count;
       })
       return c;
-      
     }
   }
 })

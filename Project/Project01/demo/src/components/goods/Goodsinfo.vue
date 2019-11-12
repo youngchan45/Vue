@@ -87,7 +87,6 @@ export default {
         .then(res => {
           //！！！易錯點：數組裡面只有一個對象的話直接取第一個，[0]經常漏掉，如果不寫[0]則在下面取priceList.sell_price應該寫上0
           this.priceList = res.data.message[0];
-          console.log(this.priceList[0]);
         });
     },
     goIntro(id) {
