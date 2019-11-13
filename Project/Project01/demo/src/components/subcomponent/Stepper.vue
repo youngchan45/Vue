@@ -21,7 +21,7 @@ export default {
   props: ["max"],
   data() {
     return {
-      value: 1
+      value: this.$store.state.count
     };
   },
   mounted() {

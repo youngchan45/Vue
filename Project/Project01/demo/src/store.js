@@ -10,6 +10,7 @@ export default new Vuex.Store({
     // count: 0,
     // car: [],
     car: carLocal,
+    count:carLocal.count
   },
   mutations: {
     // 练习
@@ -45,12 +46,22 @@ export default new Vuex.Store({
     //  objCount(state){
     //    return '最新数据是'+ state.count
     //  } 
+    // 同步購物車徽標
     getAllCount(state) {
       let c = 0;
       state.car.forEach(item => {
         c += item.count;
       })
       return c;
+    },
+    //初始化購物車數量
+    shopCount(){
+      var o ={};
+      state.car.forEach(item=>{
+        // 設置對象的屬性{id1:count1, id2:count2, id3:count3}
+        o.item.id=item.count;        
+      })
+      return o;
     }
   }
 })

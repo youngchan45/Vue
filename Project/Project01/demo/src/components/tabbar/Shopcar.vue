@@ -3,94 +3,43 @@
     <!--易错点：复选框组中的v-model是一个数组，选中的值是每个复选项中的name，选中后则讲name往数组里面加-->
     <!--单纯的复选框中的v-model是一个布尔值-->
     <!--商品部分-->
-    <van-checkbox-group
-      clickable
-      v-model="checked"
-      ref="checkboxGroup"
-      class="container"
-      v-for="(item,index) in carList"
-      :key="index"
-    >
-      <van-checkbox class="shopcarItem">
-        <div class="goodsItem">
-          <img class="imgs" :src="item.thumb_path" alt="商品圖片" />
-          <div class="info">
-            <div class="title">{{item.title}}</div>
-            <div class="price">
-              <span>￥{{item.sell_price}}</span>
-              <stepper></stepper>
-              <span>删除</span>
+    <van-checkbox-group v-model="result" ref="checkboxGroup" class="container">
+      <div v-for="(item,index) in carList"
+      :key="index">
+        <van-checkbox :name="item">
+          <div class="goodsItem">
+            <img class="imgs" :src="item.thumb_path" alt="商品圖片" />
+            <div class="info">
+              <div class="title">{{item.title}}</div>
             </div>
           </div>
+        </van-checkbox>
+        <div class="price">
+          <span>￥{{item.sell_price}}</span>
+          <stepper></stepper>
+          <span @click="del">删除</span>
         </div>
-      </van-checkbox>
-      <!-- <van-checkbox name="b" class="shopcarItem">
-        <div class="goodsItem">
-          <img
-            class="imgs"
-            src="http://demo.dtcms.net/upload/201504/20/thumb_201504200119256512.jpg"
-            alt
-          />
-          <div>
-            <div class="title">标题标题标题标题标题标题标题标题标题标题标</div>
-            <div class="price">
-              <span>￥价格</span>
-              <stepper></stepper>
-              <span>删除</span>
-            </div>
-          </div>
-        </div>
-      </van-checkbox>
-      <van-checkbox name="c" class="shopcarItem">
-        <div class="goodsItem">
-          <img
-            class="imgs"
-            src="http://demo.dtcms.net/upload/201504/20/thumb_201504200119256512.jpg"
-            alt
-          />
-          <div>
-            <div class="title">标题标题标题标题标题标题标题标题标题标题标</div>
-            <div class="price">
-              <span>￥价格</span>
-              <stepper></stepper>
-              <span>删除</span>
-            </div>
-          </div>
-        </div>
-      </van-checkbox>
-      <van-checkbox name="d" class="shopcarItem">
-        <div class="goodsItem">
-          <img
-            class="imgs"
-            src="http://demo.dtcms.net/upload/201504/20/thumb_201504200119256512.jpg"
-            alt
-          />
-          <div>
-            <div class="title">标题标题标题标题标题标题标题标题标题标题标</div>
-            <div class="price">
-              <span>￥价格</span>
-              <stepper></stepper>
-              <span>删除</span>
-            </div>
-          </div>
-        </div>
-      </van-checkbox>-->
+      </div>
     </van-checkbox-group>
 
-    <div :class="{zero:isZero}">
-      <div>
-        <van-icon name="shopping-cart-o" size="1.3rem" />
-        <span>購物車為空</span>
+    <!-- 購物車為零時展示的頁面 -->
+    <div :class="[isZero?'yZero':'nZero']">
+      <div class="zero1">
+        <div class="zero2">
+          <van-icon name="shopping-cart-o" size="1.3rem" />
+          <span>購物車為空</span>
+        </div>
+        <div @click="goShop">點我買買買</div>
       </div>
-<div @click='goShop'>點我買買買</div>
     </div>
-
+    <!-- 全選結算區域 -->
     <div class="countLayout" :class="{pay:isPay}">
       <div class="count">
-        <van-button type="primary" size="small" @click="toggleAll">全选</van-button>
+        <van-button type="primary" size="small" @click="checkAll">全选</van-button>
+      <!-- <van-checkbox v-model="allBtn" @click="checkAll" name='all'>全选</van-checkbox> -->
         <div>
           <span>合计：(价格)</span>
-          <van-button type="danger" size="small">结算（{{this.checked.length}}）</van-button>
+          <van-button type="danger" size="small">结算（{{this.result.length}}）</van-button>
         </div>
       </div>
     </div>
@@ -103,25 +52,34 @@ import Stepper from "../subcomponent/Stepper.vue";
 export default {
   data() {
     return {
-      checked: [],
-      all: true,
-      // idArr: [],
+      result: [],
+      // all: false,
       carList: [],
       isPay: false,
-      isZero: true
+      isZero: false,
+      allBtn:false,
     };
   },
   created() {
     this.getCarList();
   },
   methods: {
-    toggleAll() {
-      this.$refs.checkboxGroup.toggleAll(this.all);
-      this.all = !this.all;
+    checkAll() {
+      // this.all = !this.all
+      
+
+// 如果添加的數組裡面(代表已勾選)長度等於購物車裡的數組數量，那點擊按鈕時就是反選；除此之外的情況就是全選
+if(this.result.length==this.$store.state.car.length){
+  this.$refs.checkboxGroup.toggleAll(false);
+
+}else{
+this.$refs.checkboxGroup.toggleAll(true);
+
+}
+
+
+      // console.log(this.result,this.all)
     },
-    //   toggle() {
-    //     this.$refs.checkboxes[].toggle()
-    // },
     getCarList() {
       //經常漏掉$store
       let idArr = [];
@@ -146,12 +104,15 @@ export default {
           // this.idArr = carIds.join(",");
           this.carList = res.data.message;
           this.isPay = false;
-        this.isZero = false;
+          this.isZero = false;
           console.log(res);
         });
     },
-    goShop(){
-      this.$router.push('/home/goodslist')
+    goShop() {
+      this.$router.push("/home/goodslist");
+    },
+    del() {
+      console.log("111");
     }
   },
   components: {
@@ -162,7 +123,9 @@ export default {
 
 <style scoped>
 .container {
-  padding: 0 0.5rem;
+  padding: 0.5rem;
+  border: 1px #ccc solid;
+  box-shadow: 0 0 0.5rem #ccc;
 }
 .goodsItem,
 .price,
@@ -172,9 +135,9 @@ export default {
   justify-content: space-between;
   padding: 0.1rem 0;
 }
-.shopcarItem,
+.container,
 .price {
-  margin: 0.4rem 0;
+  margin: 0.4rem;
 }
 .imgs {
   width: 17%;
@@ -201,26 +164,37 @@ span:nth-child(3) {
   bottom: 50px;
   width: 100%;
   height: auto;
-  border-bottom: 1px rgb(236, 234, 234) solid;
+
   padding: 0.5rem;
 }
 .count span {
   font-size: 0.5rem;
   margin-right: 0.7rem;
 }
-.shopcarItem {
-  border: 1px #ccc solid;
-  box-shadow: 0 0 0.5rem #ccc;
-  padding: 0.5rem;
-}
 .pay {
   display: none;
 }
-.zero {
-  display: block;
+.zero1 {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.zero2 {
+  display: flex;
+}
+.zero2 + div {
+  font-size: 1.2rem;
+  color: rgba(255, 0, 0, 0.671);
+  margin-top: 0.6rem;
+}
+.yZero {
+  display: flex;
   justify-content: center;
   align-items: center;
+  height: 30rem;
+  font-size: 0.9rem;
+}
+.nZero {
+  display: none;
 }
 </style>
