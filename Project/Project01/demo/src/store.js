@@ -45,7 +45,7 @@ export default new Vuex.Store({
         if (item.id == goodsInfo.id) {
           item.count = goodsInfo.count
           console.log('數量', item.count)
-          return true;
+          
         }
       })
       localStorage.setItem('car', JSON.stringify(state.car))
