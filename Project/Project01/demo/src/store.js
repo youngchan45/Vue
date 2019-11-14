@@ -36,11 +36,15 @@ export default new Vuex.Store({
       }
       localStorage.setItem('car', JSON.stringify(state.car))
     },
+    //這個goodsInfo就是stepper.vue裡sendCount傳過來的參數數組
+    //id: this.goodsId,
+    //count: this.value
     updateInfo(state, goodsInfo) {
       state.car.some(item => {
+        //當數量改變時，獲取當前步進器所屬的商品id，在store中的對應count
         if (item.id == goodsInfo.id) {
-          item.count = parseInt(goodsInfo.count)
-          console.log('數量', 'item.count')
+          item.count = goodsInfo.count
+          console.log('數量', item.count)
           return true;
         }
       })

@@ -17,7 +17,7 @@
         <div class="price">
           <span>￥{{item.sell_price}}</span>
           <!-- 之所以在這裡有數量的變化，是因為在這個組件裡面為步進器傳值了 而沒有在商品頁面傳值 所以商品頁面還是保持數量1 -->
-          <stepper :init='$store.getters.shopCount[item.id]' :goodsId='index'></stepper>
+          <stepper :init='$store.getters.shopCount[item.id]' :goodsId='item.id' ref='h'></stepper>
            <!-- :count='$store.getters.shopCount[item.id]' -->
           <span @click="del">删除</span>
         </div>
@@ -109,7 +109,8 @@ this.$refs.checkboxGroup.toggleAll(true);
       this.$router.push("/home/goodslist");
     },
     del() {
-      console.log("111");
+      let a = this.$refs.h.goodsId
+      console.log(a);
     }
   },
   components: {

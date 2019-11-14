@@ -36,6 +36,8 @@ export default {
         id: this.goodsId,
         count: this.value
       });
+
+     
       // console.log(this.value);
     }
   }

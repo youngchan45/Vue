@@ -54,7 +54,7 @@ export default {
     return {
       goodsImgList: [],
       id: this.$route.params.id,
-      goodsInfo: [],
+      // goodsInfo: [],
       priceList: {},
       selectedCount: 1
       // max: this.priceList
@@ -62,7 +62,6 @@ export default {
   },
   created() {
     this.getGoodsImg();
-    this.getGoods();
     this.getPrice();
   },
   methods: {
@@ -73,13 +72,13 @@ export default {
           this.goodsImgList = res.data.message;
         });
     },
-    getGoods() {
-      axios
-        .get("http://www.liulongbin.top:3005/api/goods/getdesc/" + this.id)
-        .then(res => {
-          this.goodsInfo = res.data.message;
-        });
-    },
+    // getGoods() {
+    //   axios
+    //     .get("http://www.liulongbin.top:3005/api/goods/getdesc/" + this.id)
+    //     .then(res => {
+    //       this.goodsInfo = res.data.message;
+    //     });
+    // },
     // 获取id、上架时间、货号、库存、数量
     getPrice() {
       axios
