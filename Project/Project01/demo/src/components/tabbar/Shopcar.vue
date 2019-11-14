@@ -16,7 +16,9 @@
         </van-checkbox>
         <div class="price">
           <span>￥{{item.sell_price}}</span>
-          <stepper></stepper>
+          <!-- 之所以在這裡有數量的變化，是因為在這個組件裡面為步進器傳值了 而沒有在商品頁面傳值 所以商品頁面還是保持數量1 -->
+          <stepper :init='$store.getters.shopCount[item.id]' :goodsId='index'></stepper>
+           <!-- :count='$store.getters.shopCount[item.id]' -->
           <span @click="del">删除</span>
         </div>
       </div>
@@ -67,17 +69,12 @@ export default {
     checkAll() {
       // this.all = !this.all
       
-
 // 如果添加的數組裡面(代表已勾選)長度等於購物車裡的數組數量，那點擊按鈕時就是反選；除此之外的情況就是全選
 if(this.result.length==this.$store.state.car.length){
   this.$refs.checkboxGroup.toggleAll(false);
-
 }else{
 this.$refs.checkboxGroup.toggleAll(true);
-
 }
-
-
       // console.log(this.result,this.all)
     },
     getCarList() {

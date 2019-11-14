@@ -97,7 +97,7 @@ export default {
     },
     //步进器数量改变
     countChange(value) {
-      this.selectedCount = value;
+       this.selectedCount= value;
       console.log("子组件", value);
     },
     //点击加入购物车

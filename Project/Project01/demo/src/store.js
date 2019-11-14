@@ -10,7 +10,7 @@ export default new Vuex.Store({
     // count: 0,
     // car: [],
     car: carLocal,
-    count:carLocal.count
+    count: carLocal.count
   },
   mutations: {
     // 练习
@@ -35,7 +35,16 @@ export default new Vuex.Store({
         state.car.push(goodsForCar)
       }
       localStorage.setItem('car', JSON.stringify(state.car))
-
+    },
+    updateInfo(state, goodsInfo) {
+      state.car.some(item => {
+        if (item.id == goodsInfo.id) {
+          item.count = parseInt(goodsInfo.count)
+          console.log('數量', 'item.count')
+          return true;
+        }
+      })
+      localStorage.setItem('car', JSON.stringify(state.car))
     }
   },
   actions: {
@@ -55,12 +64,13 @@ export default new Vuex.Store({
       return c;
     },
     //初始化購物車數量
-    shopCount(){
-      var o ={};
-      state.car.forEach(item=>{
+    shopCount(state) {
+      var o = {};
+      state.car.forEach(item => {
         // 設置對象的屬性{id1:count1, id2:count2, id3:count3}
-        o.item.id=item.count;        
+        o[item.id] = item.count;
       })
+      console.log(o);
       return o;
     }
   }
