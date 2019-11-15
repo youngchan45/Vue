@@ -45,11 +45,42 @@ export default new Vuex.Store({
         if (item.id == goodsInfo.id) {
           item.count = goodsInfo.count
           console.log('數量', item.count)
-          
         }
       })
       localStorage.setItem('car', JSON.stringify(state.car))
-    }
+    },
+    delLocalGoods(state, itemId) {
+      //易錯點 循環的時候要傳入index！
+      state.car.some((item, i) => {
+        //car為本地存儲中的購物車列表數組，此處的id為$store數組裡面的商品id
+        if (item.id == itemId) {
+          state.car.splice(i, 1);
+        }
+        return true;
+      })
+      localStorage.setItem('car', JSON.stringify(state.car))
+    },
+    count(state, ){
+      //獲取shopcar.vue裡的result已選數組裡面的價格sellprice
+      //再獲取store裡state的car裡的數量
+      //兩者相乘的結果相繼放入一個數組
+      let c ={};
+state.car.forEach(item){
+  c[item.id]=item.count
+}
+return c;
+    },
+allPrice(){
+  let all={};
+//單價數組p[id] 拿到單價
+//數量數組c[id] 拿到數量
+//兩者相乘p[id]*c[id] 得到數組結果a
+// 總價ac+=結果 ac+=a
+
+
+
+}
+
   },
   actions: {
 
@@ -76,6 +107,7 @@ export default new Vuex.Store({
       })
       console.log(o);
       return o;
-    }
+    },
+    
   }
 })

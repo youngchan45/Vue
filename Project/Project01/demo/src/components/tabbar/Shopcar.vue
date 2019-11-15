@@ -4,9 +4,8 @@
     <!--单纯的复选框中的v-model是一个布尔值-->
     <!--商品部分-->
     <van-checkbox-group v-model="result" ref="checkboxGroup" class="container">
-      <div v-for="(item,index) in carList"
-      :key="index">
-        <van-checkbox :name="item">
+      <div v-for="(item,index) in carList" :key="index">
+        <van-checkbox :name="item" ref='name'>
           <div class="goodsItem">
             <img class="imgs" :src="item.thumb_path" alt="商品圖片" />
             <div class="info">
@@ -17,9 +16,10 @@
         <div class="price">
           <span>￥{{item.sell_price}}</span>
           <!-- 之所以在這裡有數量的變化，是因為在這個組件裡面為步進器傳值了 而沒有在商品頁面傳值 所以商品頁面還是保持數量1 -->
-          <stepper :init='$store.getters.shopCount[item.id]' :goodsId='item.id' ref='h'></stepper>
-           <!-- :count='$store.getters.shopCount[item.id]' -->
-          <span @click="del">删除</span>
+          <!--不能直接拿數組裡面的數量 因為不知道是哪一個id 應該先根據id拿數量-->
+          <stepper :init="$store.getters.shopCount[item.id]" :goodsId="item.id" ref="h"></stepper>
+          <!-- :count='$store.getters.shopCount[item.id]' -->
+          <a href="#" @click.prevent="del(item.id,index)">删除</a>
         </div>
       </div>
     </van-checkbox-group>
@@ -38,7 +38,7 @@
     <div class="countLayout" :class="{pay:isPay}">
       <div class="count">
         <van-button type="primary" size="small" @click="checkAll">全选</van-button>
-      <!-- <van-checkbox v-model="allBtn" @click="checkAll" name='all'>全选</van-checkbox> -->
+        <!-- <van-checkbox v-model="allBtn" @click="checkAll" name='all'>全选</van-checkbox> -->
         <div>
           <span>合计：(价格)</span>
           <van-button type="danger" size="small">结算（{{this.result.length}}）</van-button>
@@ -59,22 +59,27 @@ export default {
       carList: [],
       isPay: false,
       isZero: false,
-      allBtn:false,
+      allBtn: false
     };
   },
   created() {
     this.getCarList();
+    // this.all();
+    console.log('已選', this.result);
   },
   methods: {
+    // all(){
+    //   this.$refs.checkboxGroup.toggleAll(true);
+    // },
     checkAll() {
       // this.all = !this.all
-      
-// 如果添加的數組裡面(代表已勾選)長度等於購物車裡的數組數量，那點擊按鈕時就是反選；除此之外的情況就是全選
-if(this.result.length==this.$store.state.car.length){
-  this.$refs.checkboxGroup.toggleAll(false);
-}else{
-this.$refs.checkboxGroup.toggleAll(true);
-}
+
+      // 如果添加的數組裡面(代表已勾選)長度等於購物車裡的數組數量，那點擊按鈕時就是反選；除此之外的情況就是全選
+      if (this.result.length == this.$store.state.car.length) {
+        this.$refs.checkboxGroup.toggleAll(false);
+      } else {
+        this.$refs.checkboxGroup.toggleAll(true);
+      }
       // console.log(this.result,this.all)
     },
     getCarList() {
@@ -108,9 +113,17 @@ this.$refs.checkboxGroup.toggleAll(true);
     goShop() {
       this.$router.push("/home/goodslist");
     },
-    del() {
-      let a = this.$refs.h.goodsId
-      console.log(a);
+    del(itemId, index) {
+      //之前學習的刪除方式（傳遞index）是將信息從頁面的渲染中刪去，因為這裡還涉及到本地存儲，所以不僅要從頁面刪去，還要從store的本地存儲中刪去
+      //頁面刪去
+      this.carList.splice(index, 1);
+      //易錯：本地存儲不是寫在這裡
+      // localStorage.removeItem('id')
+      this.$store.commit("delLocalGoods", itemId);
+      // console.log(this.item.id)
+    },
+    goodsPay(p){
+      let p = this.result.
     }
   },
   components: {
