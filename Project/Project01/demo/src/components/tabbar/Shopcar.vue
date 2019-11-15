@@ -123,7 +123,7 @@ export default {
       // console.log(this.item.id)
     },
     goodsPay(p){
-      let p = this.result.
+      
     }
   },
   components: {

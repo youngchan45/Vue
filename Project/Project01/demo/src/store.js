@@ -65,9 +65,10 @@ export default new Vuex.Store({
       //再獲取store裡state的car裡的數量
       //兩者相乘的結果相繼放入一個數組
       let c ={};
-state.car.forEach(item){
+state.car.forEach(item=>{
+  
   c[item.id]=item.count
-}
+})
 return c;
     },
 allPrice(){
